@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Reset password" %} | {% endblock title %}
+
+{% block content %}
+  <div class="container pt-5">
+    {% include '_messages.html' %}
+    <h2>{% trans "Request a new account activation link" %}</h2>
+    <form method="post" class="form auth-form">{% csrf_token %}
+      {% include '_form.html' with form=form %}
+      <div class="btn-wrap">
+        <button class="btn" type='submit'>{% trans "Send the link" %}</button>
+        <small><a href="{% url 'login' %}" >{% trans "Login page" %}</a></small>
+      </div>
+    </form>
+  </div>
+{% endblock %}

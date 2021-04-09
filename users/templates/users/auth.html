@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if 'register' in request.path %}
+    {% trans "Register" %} | 
+  {% elif 'login' in request.path %}
+    {% trans "Login" %} | 
+  {% endif %}
+{% endblock title %}
+
+{% block content %}
+<div class="colorful">
+  <div class="container pt-5">
+    {% include '_messages.html' %}
+    {% if 'register' in request.path %}
+      <form method="post" class="form auth-form">{% csrf_token %}
+        <h2>{% trans "Register" %}</h2>
+        {% include '_form.html' with form=form %}
+        <div class="btn-wrap">
+          <button type="submit" class="btn">{% trans "Register" %}</button>
+          <small class="text-muted">{% trans "Have an account?" %} <a href="{% url 'login' %}" class="link">{% trans "Login" %}</a></small>
+        </div>
+      </form>
+    {% elif 'login' in request.path %}
+      <form method="post" class="form auth-form">{% csrf_token %}
+        <h2>{% trans "Login" %}</h2>
+        {% include '_form.html' with form=form %}
+        <small class="dblock">
+          <a href="{% url 'password_reset' %}" class="link">{% trans "Forgot you password?" %}</a>
+        </small>
+        <div class="btn-wrap">
+          <button type="submit" class="btn">{% trans "Login" %}</button>
+          <small class="text-muted">{% trans "Need an account?" %} <a href="{% url 'register' %}" class="link">{% trans "Register" %}</a></small>
+        </div>
+      </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}

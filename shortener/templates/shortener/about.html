@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Hey | {% endblock title %}
+
+{% block content %}
+<div class="colorful">
+  <main class="container pt-5" id="about">
+    {% if not request.user.is_authenticated %}
+    <h2>Come with us</h2>
+    <h3>Creating an account, you’ll&nbsp;be able to:</h3>
+    {% else %}
+    <h2>Hi, {{ request.user.username }}!</h2>
+    <h3>What you can do:</h3>
+    {% endif %}
+    <ul>
+      <li>Access links you created any time.</li>
+      <li>See how many clicks those links got!</li>
+      <li>Edit the links, changing the long URL or the short code.</li>
+      <li>Use real words and even phases instead of the short code.</li>
+      <li>Use even shorter code for your links (now it defaults to 5 symbols).</li>
+    </ul>
+    <p>Feeling geeky? Check out <a href="{% url 'link-api:about' %}">our API.</p>
+    <p class="text-center"><a href="{% url 'home' %}">Homepage</a></p>
+  </main>
+</div>
+{% endblock content %}

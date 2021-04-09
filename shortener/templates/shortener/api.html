@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}API | {% endblock title %}
+
+{% block content %}
+  <div class="colorful-static" id="api">
+    <main class="container pt-5" id="about">
+      <h1>API</h1>
+      <nav>
+        <a href="{% url 'home' %}" class="diblock">Homepage</a>
+        {% if user.is_authenticated %}<a href="{% url 'dashboard' %}" class="diblock">Dashboard</a>{% endif %}
+      </nav>
+      <div class="content-box-dark">
+        {% if user.is_authenticated %}
+        <p>Your token:
+          <span class="hidden" >
+            <span id="token">{{ user.auth_token }}</span>
+            &nbsp;<i class="far fa-copy" onclick="copyToClipboard(this)"></i>
+          </span> <a class="toggler" onclick="togglePreviousSibling(this)">Show</a>
+          <small class="dblock text-error">Keep your token a secret!</small>
+        </p>
+        <p>Don’t forget to pass the authentication token in the “Authorization” header of every request.</p>
+        {% else %}
+        <p>You need to <a href="{% url 'register' %}">create and account</a>. This way you will get an <em>authentication token</em> that you should provide with every request. The token will always be available for you on this page.</p>
+        {% endif %}
+        <p>Base URL: <code>{{ base_url }}</code></p>
+        <h3>Paths relative to the base URL</h3>
+        <p><code>list/</code> — get all your links;</p>
+        <p><code>new/</code> — create a new link;</p>
+        <p><code>&lt;code&gt;/</code> — get extra data about an existing link;</p>
+        <p><code>update/&lt;code&gt;/</code> — update some fields of a link;</p>
+        <p><code>delete/&lt;code&gt;/</code> — delete a link <span class="text-error">(careful here)</span>.</p>
+        <h3>Create links</h3>
+        <p>You should use a POST method and pass a <code>source</code> — the link that you want to shorten.</p>
+        <p>Create a new link using cURL:</p>
+<pre><code class="bash">curl -X POST {{ base_url }}new/ -d <span class="string">"source=&lt;THE LONG LINK&gt;"</span> -H <span class="string">"Authorization: Token &lt;YOUR TOKEN&gt;"</span></code></pre>
+
+        <p>Using Python:</p>
+<pre><code class='python'><span class="keyword">import</span> requests
+
+url <span class="operator">=</span> '{{ base_url }}new/'
+auth_token <span class="operator">=</span> '&lt;YOUR TOKEN&gt;'
+headers <span class="operator">=</span> {'Authorization': 'Token {}'.<span class="function">format</span>(auth_token)}
+data <span class="operator">=</span> {'source': '&lt;THE LONG LINK&gt;'}
+
+r <span class="operator">=</span> requests.<span class="function">post</span>(url, data<span class="operator">=</span>data, headers<span class="operator">=</span>headers)
+result <span class="operator">=</span> r.<span class="function">json</span>().<span class="function">get</span>('link')
+</code></pre>
+        <p>You will get an existing short link if you already created one with the same exact source.</p>
+        <h3>Get a list of all your links</h3>
+      <p>Using cURL, you can get a list of all your links running a command like this:</p>
+<pre><code class="bash">curl {{ base_url }}list/ -H <span class="string">"Authorization: Token &lt;YOUR TOKEN&gt;"</span></code></pre>
+
+        <p>To get the same list using Python (and also pretty-print it), you can do the following:</p>
+<pre><code class='python'><span class="keyword">import</span> json
+<span class="keyword">import</span> requests
+
+url <span class="operator">=</span> '{{ base_url }}list/'
+auth_token <span class="operator">=</span> '&lt;YOUR TOKEN&gt;'
+headers <span class="operator">=</span> {'Authorization': 'Token {}'.<span class="function">format</span>(auth_token)}
+
+r <span class="operator">=</span> requests.<span class="function">get</span>(url, headers<span class="operator">=</span>headers)
+result <span class="operator">=</span> r.<span class="function">json</span>()
+<span class="function">print</span>(json.<span class="function">dumps</span>(result, indent<span class="operator">=</span><span class="number">4</span>))
+</code></pre>
+        <h3>Get data about an existing link</h3>
+        <p>Send a GET request including a code of the link to a path.</p>
+<pre><code class="bash">curl {{ base_url }}&lt;code&gt;/ -H <span class="string">"Authorization: Token &lt;YOUR TOKEN&gt;"</span></code></pre>
+        <h3>Update existing link fields</h3>
+        <p>Updatable fields: <code>source</code>, <code>code</code>, <code>name</code>. Pass them in the body of a request using PUT or PATCH method.</p>
+<pre><code class="bash">curl -X PUT {{ base_url }}update/&lt;code&gt;/ -d <span class="string">"name=&lt;VALUE&gt;&code=&lt;VALUE&gt;"</span> -H <span class="string">"Authorization: Token &lt;YOUR TOKEN&gt;"</span></code></pre>
+        <p>And here again is Python's Requests:</p>
+<pre><code class='python'><span class="keyword">import</span> requests
+
+url <span class="operator">=</span> '{{ base_url }}update/&lt;code&gt;/'
+auth_token <span class="operator">=</span> '&lt;YOUR TOKEN&gt;'
+headers <span class="operator">=</span> {'Authorization': 'Token {}'.<span class="function">format</span>(auth_token)}
+data <span class="operator">=</span> {'source': 'value'}
+
+r <span class="operator">=</span> requests.<span class="function">put</span>(url, data<span class="operator">=</span>data, headers<span class="operator">=</span>headers)
+</code></pre>
+      <h3>Delete a link</h3>
+      <p>Be careful if you don't want to lose the data you may need.</p>
+      <p>Send a DELETE request, passing a code of a link as usual.</p>
+<pre><code class="bash">curl -X DELETE {{ base_url }}delete/&lt;code&gt;/ </span> -H <span class="string">"Authorization: Token &lt;YOUR TOKEN&gt;"</span></code></pre>
+        <p>And here again is Python's Requests:</p>
+<pre><code class='python'><span class="keyword">import</span> requests
+
+url <span class="operator">=</span> '{{ base_url }}delete/&lt;code&gt;/'
+auth_token <span class="operator">=</span> '&lt;YOUR TOKEN&gt;'
+headers <span class="operator">=</span> {'Authorization': 'Token {}'.<span class="function">format</span>(auth_token)}
+
+r <span class="operator">=</span> requests.<span class="function">delete</span>(url, headers<span class="operator">=</span>headers)
+</code></pre>
+      </div>
+    </main>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}No | {% endblock title %}
+
+{% block content %}
+  <div class="colorful">
+    <main class="container text-center pt-9">
+      <h1 class="error-heading">403</h1>
+      <p>No-no, you better go to <a href="{% url 'home' %}">homepage</a>.</p>
+    </main>
+  </div>
+{% endblock content %}

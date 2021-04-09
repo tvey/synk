@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Activate your account" %} |{% endblock title %}
+
+{% block content %}
+  <div class="container pt-5 text-center">
+    <p>{% trans "Sorry, this activation link is invalid." %}</p>
+    <p><a href="{% url 'resend-activation' %}" class="link">{% trans "Resend the link" %}</a></p>
+    <p><a href="{% url 'login' %}" class="link">{% trans "Login page" %}</a></p>
+  </div>
+
+{% endblock %}

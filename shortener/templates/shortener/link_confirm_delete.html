@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete | {% endblock title %}
+
+{% block content %}
+  <div class="container text-center pt-5">
+    <p>Are you sure you want to delete the link <a href="{{ request.scheme }}://{{ request.get_host }}/{{ link.code }}/">{{ request.get_host }}/{{ object.code }}</a>?</p>
+    <form method="post">{% csrf_token %}
+      <a class="btn" href="{% url 'dashboard' %}">No thanks</a>&nbsp;
+      <button class="btn btn-error" type='submit'>Sure, delete</button>
+      </div>
+  </form>
+  </div>
+{% endblock content %}

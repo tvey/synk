@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | {% endblock title %}
+
+{% block content %}
+<div id="dashboard">
+  <div class="colorful-static">
+    <header>
+      <h1>Dashboard</h1>
+      <nav>
+        <ul>
+          <li id="username"><strong>{{ request.user.username }}</strong></li>
+          <li><a href="{% url 'home' %}">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+
+  <div class="container-wide">
+    <form action="{% url 'search' %}" class="form">
+      <div class="flex-group">
+        <input type="search" placeholder="Seach..." name="q" required>
+        <button type="submit" class="btn"><span class="fa fa-search" aria-hidden="true"></span></button>
+      </div>
+    </form>
+    <div id="add"><a href="{% url 'create' %}" class="btn btn-accent diblock" >Add new</a></div>
+    {% if 'search' in request.path %}<small class="dblock return"><a href="{% url 'dashboard' %}" class="text-muted">&#8592; Back to all links</a></small>{% endif %}
+    <main>
+      <table id="link-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Short link</th>
+            <th>Original URL</th>
+            <th>Clicks</th>
+            <th>Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for link in link_list %}
+            <tr>
+              <td>{% if link.name %}{{ link.name }}{% else %}———{% endif %}</td>
+              <td>
+                <a href="{{ request.scheme }}://{{ request.get_host }}/{{ link.code }}/">{{ request.scheme }}://{{ request.get_host }}/{{ link.code }}/</a>&nbsp;&nbsp;<i class="far fa-copy" onclick="copyToClipboard(this, button = false, copied = true)"></i>
+              </td>
+              <td><a href="{{ link.source }}">{{ link.source|truncatechars:150 }}</a></td>
+              <td class="click">{{ link.click_set.count }}</td>
+            <td class="manage">
+              <a href="{% url 'update' link.code %}">Edit</a>
+              <a href="{% url 'delete' link.code %}" class="link-error">Delete</a>
+            </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="pagination text-right">
+        {% if page_obj.has_previous %}          
+          <a href="?page={{ page_obj.previous_page_number }}" class="previous"><i class="fas fa-chevron-left"></i></a>
+        {% endif %}
+
+        {% if page_obj.has_previous or page_obj.has_next %}  
+          <span class="current">{{ page_obj.number }}</span>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class="next"><i class="fas fa-chevron-right"></i></a>
+        {% endif %}
+      </div>
+    </main>
+    <footer>
+      <ul>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'link-api:about' %}">API</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+    </footer>
+  </div>
+</div>
+
+{% endblock content %}

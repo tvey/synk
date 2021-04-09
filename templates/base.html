@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Barlow:wght@600&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/cadbcc82d5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <link rel="icon" href="{% static 'icon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}">
+    <link rel="manifest" href="{% static 'manifest.webmanifest' %}">
+    <title>{% block title %}{% endblock title %}Squeeze</title>
+  </head>
+  <body>
+    {% block content %}{% endblock content %}
+    <script src="{% static 'script.js' %}"></script>
+  </body>
+</html>
