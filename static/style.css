@@ -161,7 +161,6 @@ pre::-webkit-scrollbar-thumb {
 
 .container {
   max-width: var(--max-width);
-  min-height: 400px;
   padding: 1rem 1rem 1rem 1rem;
   margin: auto;
   min-height: 100vh;
@@ -589,6 +588,7 @@ label[for=id_code]:after {
 
 #api .toggler:hover {
   border-color: #fffba8;
+  cursor:  pointer;
 }
 
 #token {

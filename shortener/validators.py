@@ -13,7 +13,9 @@ def validate_url(value):
     try:
         validator(value)
     except:
-        raise ValidationError('Please make sure to use a good link :)', code='invalid')
+        raise ValidationError(
+            'Please make sure to use a good link :)', code='invalid'
+        )
     return value
 
 
@@ -66,8 +68,9 @@ def validate_forbidden(value):
         'create',
         'new',
         'yay',
-        'dashboard' 'admin',
-        'sadmi',
+        'dashboard',
+        'admin',
+        'sadmin',
         'api',
         'one',
         'eez',

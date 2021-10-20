@@ -9,7 +9,7 @@ from .validators import (
     validate_length,
     validate_forbidden,
 )
-from .utils import generate_code
+from .utils import generate_shortcode
 
 
 class Link(models.Model):
@@ -35,7 +35,7 @@ class Link(models.Model):
     def save(self, *args, **kwargs):
         if not self.code:
             while True:
-                code = generate_code(5)
+                code = generate_shortcode(7)
                 if not Link.objects.filter(code=code).exists():
                     break
             self.code = code

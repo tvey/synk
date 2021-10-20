@@ -1,26 +1,20 @@
-import io
-
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.urls import reverse, translate_url
 from django.utils.encoding import force_bytes
 from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.translation import activate, LANGUAGE_SESSION_KEY, gettext as _
+from django.utils.translation import gettext as _
 
 from .models import User
 from .forms import RegistrationForm, EmailForm, LoginForm
-from .utils import write_txt, write_csv, write_md, write_json
 
 
 class TokenGenerator(PasswordResetTokenGenerator):
@@ -68,13 +62,17 @@ def register(request):
     form = RegistrationForm(request.POST or None)
     if form.is_valid():
         email = form.cleaned_data.get('email')
-        if not User.objects.filter(email__iexact=email, is_active=True).exists():
+        if not User.objects.filter(
+            email__iexact=email, is_active=True
+        ).exists():
             user = form.save(commit=False)
             user.is_active = False
             user.save()
 
             send_activation_link(request, user)
-            msg = _('Welcome! Please check your email to complete registration.')
+            msg = _(
+                'Welcome! Please check your email to complete registration.'
+            )
             messages.info(request, _(msg))
             return redirect('login')
 

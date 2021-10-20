@@ -14,11 +14,13 @@ from .views import (
     change_password,
     LoginUserView,
 )
-from .forms import LoginForm, ResetPasswordForm
+from .forms import ResetPasswordForm
 
 urlpatterns = [
     path('register/', register, name='register'),
-    path('activate/<uidb64>/<token>/', activate_account, name='activate-account'),
+    path(
+        'activate/<uidb64>/<token>/', activate_account, name='activate-account'
+    ),
     path('resend-activation/', resend_activation, name='resend-activation'),
     path('login/', LoginUserView.as_view(), name='login'),
     path('change-password/', change_password, name='change-password'),

@@ -2,8 +2,6 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.views.generic import TemplateView
 
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.generics import (
     ListAPIView,
