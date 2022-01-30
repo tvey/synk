@@ -5,11 +5,11 @@ verify_ssl = true
 
 [dev-packages]
 isort = "*"
+ipython = "*"
 
 [packages]
-django = "==3.1.7"
+django = "==3.2.11"
 psycopg2 = "*"
-python-dotenv = "*"
 dj-database-url = "*"
 djangorestframework = "*"
 whitenoise = "*"
@@ -19,6 +19,7 @@ pytest-django = "*"
 pytest-factoryboy = "*"
 faker = "*"
 pytest-cov = "*"
+django-environ = "*"
 
 [requires]
 python_version = "3.9"
