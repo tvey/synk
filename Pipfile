@@ -1,25 +1,23 @@
 [[source]]
-name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
-
-[dev-packages]
-isort = "*"
-ipython = "*"
+name = "pypi"
 
 [packages]
-django = "==3.2.11"
-psycopg2 = "*"
-dj-database-url = "*"
+django = "~=3.2"
 djangorestframework = "*"
-whitenoise = "*"
+psycopg2-binary = "*"
+django-environ = "*"
 gunicorn = "*"
+whitenoise = "*"
+dj-database-url = "*"
+
+[dev-packages]
 pytest = "*"
 pytest-django = "*"
-pytest-factoryboy = "*"
 faker = "*"
+pytest-factoryboy = "*"
 pytest-cov = "*"
-django-environ = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
