@@ -28,10 +28,11 @@
         <a href="{% url 'register' %}">Register</a>
       </p>
       <p><a href="{% url 'about' %}">Learn more </a>about what you can get creating an account.</p>
-      <p><a href="{% url 'login' %}">Login</a> if you’re already in.</p>
+      <p><a href="{% url 'login' %}">Log in</a> if you’re already in.</p>
     {% else %}
       <a href="{% url 'dashboard' %}" class="d-block">Dashboard</a>
     {% endif %}
   </main>
+  {% include '_footer.html' %}
 </div>
 {% endblock content %}

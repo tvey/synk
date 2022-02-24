@@ -19,7 +19,7 @@
         {% include '_form.html' with form=form %}
         <div class="btn-wrap">
           <button type="submit" class="btn">{% trans "Register" %}</button>
-          <small class="text-muted">{% trans "Have an account?" %} <a href="{% url 'login' %}" class="link">{% trans "Login" %}</a></small>
+          <small class="text-muted">{% trans "Have an account?" %} <a href="{% url 'login' %}" class="link">{% trans "Log in" %}</a></small>
         </div>
       </form>
     {% elif 'login' in request.path %}
@@ -30,11 +30,12 @@
           <a href="{% url 'password_reset' %}" class="link">{% trans "Forgot you password?" %}</a>
         </small>
         <div class="btn-wrap">
-          <button type="submit" class="btn">{% trans "Login" %}</button>
+          <button type="submit" class="btn">{% trans "Log in" %}</button>
           <small class="text-muted">{% trans "Need an account?" %} <a href="{% url 'register' %}" class="link">{% trans "Register" %}</a></small>
         </div>
       </form>
     {% endif %}
   </div>
+  {% include '_footer.html' %}
 </div>
 {% endblock content %}

@@ -1,0 +1,17 @@
+<footer>
+  <ul>
+    {% if not request.path == "/" %}
+    <li><a href="{% url 'home' %}">Home</a></li>
+    {% endif %}
+    {% if not request.user.is_authenticated and '/register' not in request.path and '/login' not in request.path %}
+    <li><a href="{% url 'register' %}">Register</a></li>
+    {% endif %}
+    {% if '/about' not in request.path and '/dashboard' not in request.path %}
+    <li><a href="{% url 'about' %}">About</a></li>
+    {% endif %}
+    <li><a href="{% url 'link-api:about' %}">API</a></li>
+    {% if request.user.is_authenticated %}
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+    {% endif %}
+  </ul>
+</footer>

@@ -159,6 +159,29 @@ pre::-webkit-scrollbar-thumb {
   border-radius: var(--b-radius);
 }
 
+footer {
+  position: absolute;
+  bottom: 1.2rem;
+  width: 200px;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+footer ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+footer a {
+  opacity: 0.7;
+}
+
+footer a:hover {
+  opacity: 1;
+}
+
 .container {
   max-width: var(--max-width);
   padding: 1rem 1rem 1rem 1rem;
@@ -413,29 +436,6 @@ pre::-webkit-scrollbar-thumb {
 #dashboard #add {
   text-align: right;
   margin-bottom: 1rem;
-}
-
-#dashboard footer {
-  position: absolute;
-  bottom: 1.2rem;
-  width: 200px;
-  left: 0; 
-  right: 0; 
-  margin-left: auto; 
-  margin-right: auto;
-}
-
-#dashboard footer ul {
-  display: flex;
-  justify-content: space-between;
-}
-
-#dashboard footer a {
-  opacity: 0.7;
-}
-
-#dashboard footer a:hover {
-  opacity: 1;
 }
 
 .return {

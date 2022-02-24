@@ -67,13 +67,7 @@
         {% endif %}
       </div>
     </main>
-    <footer>
-      <ul>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'link-api:about' %}">API</a></li>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
-      </ul>
-    </footer>
+    {% include '_footer.html' %}
   </div>
 </div>
 

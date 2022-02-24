@@ -40,7 +40,7 @@
 
 url <span class="operator">=</span> '{{ base_url }}new/'
 auth_token <span class="operator">=</span> '&lt;YOUR TOKEN&gt;'
-headers <span class="operator">=</span> {'Authorization': 'Token {}'.<span class="function">format</span>(auth_token)}
+headers <span class="operator">=</span> {'Authorization': f'Token {auth_token}'}
 data <span class="operator">=</span> {'source': '&lt;THE LONG LINK&gt;'}
 
 r <span class="operator">=</span> requests.<span class="function">post</span>(url, data<span class="operator">=</span>data, headers<span class="operator">=</span>headers)
@@ -57,7 +57,7 @@ result <span class="operator">=</span> r.<span class="function">json</span>().<s
 
 url <span class="operator">=</span> '{{ base_url }}list/'
 auth_token <span class="operator">=</span> '&lt;YOUR TOKEN&gt;'
-headers <span class="operator">=</span> {'Authorization': 'Token {}'.<span class="function">format</span>(auth_token)}
+headers <span class="operator">=</span> {'Authorization': f'Token {auth_token}'}
 
 r <span class="operator">=</span> requests.<span class="function">get</span>(url, headers<span class="operator">=</span>headers)
 result <span class="operator">=</span> r.<span class="function">json</span>()
@@ -74,7 +74,7 @@ result <span class="operator">=</span> r.<span class="function">json</span>()
 
 url <span class="operator">=</span> '{{ base_url }}update/&lt;code&gt;/'
 auth_token <span class="operator">=</span> '&lt;YOUR TOKEN&gt;'
-headers <span class="operator">=</span> {'Authorization': 'Token {}'.<span class="function">format</span>(auth_token)}
+headers <span class="operator">=</span> {'Authorization': f'Token {auth_token}'}
 data <span class="operator">=</span> {'source': 'value'}
 
 r <span class="operator">=</span> requests.<span class="function">put</span>(url, data<span class="operator">=</span>data, headers<span class="operator">=</span>headers)
@@ -88,7 +88,7 @@ r <span class="operator">=</span> requests.<span class="function">put</span>(url
 
 url <span class="operator">=</span> '{{ base_url }}delete/&lt;code&gt;/'
 auth_token <span class="operator">=</span> '&lt;YOUR TOKEN&gt;'
-headers <span class="operator">=</span> {'Authorization': 'Token {}'.<span class="function">format</span>(auth_token)}
+headers <span class="operator">=</span> {'Authorization': f'Token {auth_token}'}
 
 r <span class="operator">=</span> requests.<span class="function">delete</span>(url, headers<span class="operator">=</span>headers)
 </code></pre>
