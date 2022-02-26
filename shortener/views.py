@@ -9,8 +9,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from django.urls import reverse, reverse_lazy
-from rest_framework.authtoken.models import Token
+from django.urls import reverse_lazy
 
 from .forms import LinkForm, LinkModelForm
 from .models import Link

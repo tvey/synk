@@ -13,6 +13,7 @@ from .views import (
     resend_activation,
     change_password,
     LoginUserView,
+    UserSettingsView,
 )
 from .forms import ResetPasswordForm
 
@@ -26,33 +27,34 @@ urlpatterns = [
     path('change-password/', change_password, name='change-password'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path(
-        "reset-password/",
+        'reset-password/',
         PasswordResetView.as_view(
-            template_name="users/password_reset.html",
+            template_name='users/password_reset.html',
             form_class=ResetPasswordForm,
-            html_email_template_name="users/password_reset_email.html",
+            html_email_template_name='users/password_reset_email.html',
         ),
-        name="password_reset",
+        name='password_reset',
     ),
     path(
-        "reset-password/done/",
+        'reset-password/done/',
         PasswordResetDoneView.as_view(
-            template_name="users/password_reset_done.html"
+            template_name='users/password_reset_done.html'
         ),
-        name="password_reset_done",
+        name='password_reset_done',
     ),
     path(
-        "reset-password-confirm/<uidb64>/<token>/",
+        'reset-password-confirm/<uidb64>/<token>/',
         PasswordResetConfirmView.as_view(
-            template_name="users/password_reset_confirm.html"
+            template_name='users/password_reset_confirm.html'
         ),
-        name="password_reset_confirm",
+        name='password_reset_confirm',
     ),
     path(
-        "password-reset-complete/",
+        'password-reset-complete/',
         PasswordResetCompleteView.as_view(
-            template_name="users/password_reset_complete.html"
+            template_name='users/password_reset_complete.html'
         ),
-        name="password_reset_complete",
+        name='password_reset_complete',
     ),
+    path('settings/', UserSettingsView.as_view(), name='user-settings')
 ]

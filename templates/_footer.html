@@ -10,8 +10,8 @@
     <li><a href="{% url 'about' %}">About</a></li>
     {% endif %}
     <li><a href="{% url 'link-api:about' %}">API</a></li>
-    {% if request.user.is_authenticated %}
-    <li><a href="{% url 'logout' %}">Logout</a></li>
+    {% if request.user.is_authenticated and '/settings' not in request.path %}
+    <li><a href="{% url 'user-settings' %}">Settings</a></li>
     {% endif %}
   </ul>
 </footer>

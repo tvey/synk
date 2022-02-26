@@ -21,6 +21,12 @@ class LoginForm(AuthenticationForm):
 
     username = forms.CharField(
         label=_('Username or email'),
+        widget=forms.TextInput(
+            attrs={
+                'required': 'true',
+                'autofocus': 'autofocus',
+            }
+        ),
     )
 
     def confirm_login_allowed(self, user):
@@ -48,10 +54,8 @@ class RegistrationForm(UserCreationForm):
         },
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
                 'required': 'true',
                 'autofocus': 'autofocus',
-                'placeholder': '',
             }
         ),
     )

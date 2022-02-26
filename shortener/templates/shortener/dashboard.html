@@ -41,9 +41,9 @@
             <tr>
               <td>{% if link.name %}{{ link.name }}{% else %}———{% endif %}</td>
               <td>
-                <a href="{{ request.scheme }}://{{ request.get_host }}/{{ link.code }}/">{{ request.scheme }}://{{ request.get_host }}/{{ link.code }}/</a>&nbsp;&nbsp;<i class="far fa-copy" onclick="copyToClipboard(this, button = false, copied = true)"></i>
+                <a href="{{ request.scheme }}://{{ request.get_host }}/{{ link.code }}/" target="_blank">{{ request.scheme }}://{{ request.get_host }}/{{ link.code }}/</a>&nbsp;&nbsp;<i class="far fa-copy" onclick="copyToClipboard(this, button = false, copied = true)"></i>
               </td>
-              <td><a href="{{ link.source }}">{{ link.source|truncatechars:150 }}</a></td>
+              <td><a href="{{ link.source }}" target="_blank">{{ link.source|truncatechars:150 }}</a></td>
               <td class="click">{{ link.click_set.count }}</td>
             <td class="manage">
               <a href="{% url 'update' link.code %}">Edit</a>

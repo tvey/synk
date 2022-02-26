@@ -54,10 +54,11 @@ input[type="text"],
 input[type="email"],
 input[type="search"],
 input[type="password"] {
+  line-height: 1;
   border-radius: var(--b-radius);
   display: block;
   width: 100%;
-  padding: 0.7rem 0.75rem;
+  padding: 1rem 1rem;
   outline: 0 none;
   border: var(--b-width) solid #22d5ae;
   transition: border-color 0.3s;
@@ -525,6 +526,11 @@ table a:not(table .manage a):hover {
 
 .pagination i {
   font-size: 0.8rem;
+}
+
+#settings .content-box-dark p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 #code-rules {

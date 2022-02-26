@@ -1,6 +1,7 @@
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib import messages
@@ -12,6 +13,8 @@ from django.utils.encoding import force_bytes
 from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.translation import gettext as _
+from django.db.models import Q
+from django.views.generic import TemplateView
 
 from .models import User
 from .forms import RegistrationForm, EmailForm, LoginForm
@@ -153,3 +156,7 @@ def change_password(request):
         return redirect('home')
 
     return render(request, 'users/password_change.html', {'form': form})
+
+
+class UserSettingsView(TemplateView, LoginRequiredMixin):
+    template_name = 'users/user_settings.html'
