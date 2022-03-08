@@ -6,7 +6,7 @@
     {% if not request.user.is_authenticated and '/register' not in request.path and '/login' not in request.path %}
     <li><a href="{% url 'register' %}">Register</a></li>
     {% endif %}
-    {% if '/about' not in request.path and '/dashboard' not in request.path %}
+    {% if '/about' not in request.path and '/dashboard' not in request.path and '/yay' not in request.path %}
     <li><a href="{% url 'about' %}">About</a></li>
     {% endif %}
     <li><a href="{% url 'link-api:about' %}">API</a></li>
