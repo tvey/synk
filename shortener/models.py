@@ -35,7 +35,7 @@ class Link(models.Model):
     def save(self, *args, **kwargs):
         if not self.code:
             while True:
-                code = generate_shortcode(7)
+                code = generate_shortcode(6)
                 if not Link.objects.filter(code=code).exists():
                     break
             self.code = code
