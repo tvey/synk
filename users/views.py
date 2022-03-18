@@ -158,5 +158,5 @@ def change_password(request):
     return render(request, 'users/password_change.html', {'form': form})
 
 
-class UserSettingsView(TemplateView, LoginRequiredMixin):
+class UserSettingsView(LoginRequiredMixin, TemplateView):
     template_name = 'users/user_settings.html'
