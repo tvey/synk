@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% if 'register' in request.path %}
+    {% trans "Register" %} | 
+  {% elif 'login' in request.path %}
+    {% trans "Login" %} | 
+  {% endif %}
+{% endblock title %}
+
+{% block content %}
+<div class="colorful">
+  <main class="container pt-5" id="settings">
+    <h2>Your Settings</h2>
+    <div class="content-box-dark">
+      <p><a href="{% url 'dashboard' %}" class="diblock">Back to Dashboard</a></p>
+      <hr>
+      <p>
+        Your API token:
+        <span class="hidden" >
+          <span id="token">{{ user.auth_token }}</span>
+          &nbsp;<i class="far fa-copy" onclick="copyToClipboard(this)"></i>
+        </span> <a class="toggler" onclick="togglePreviousSibling(this)">Show</a>
+        <small class="dblock text-error">Keep your token a secret!</small>
+      </p>
+      <hr>
+      <p>
+        <a href="{% url 'change-password' %}">Change password</a>
+      </p>
+      <hr>
+      <p><a href="{% url 'logout' %}">Logout</a></p>
+    </div>
+  </main>
+</div>
+{% endblock content %}
