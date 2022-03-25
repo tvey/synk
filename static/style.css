@@ -98,6 +98,8 @@ body {
   line-height: 1.5;
   background: var(--dark-color);
   color: #fff;
+  position: relative;
+  min-height: 100vh;
 }
 
 h1, h2, h3, h4 {
@@ -165,7 +167,8 @@ footer {
   bottom: 1.2rem;
   width: 200px;
   left: 0; 
-  right: 0; 
+  right: 0;
+  height: calc(100% - 98%);
   margin-left: auto; 
   margin-right: auto;
 }
