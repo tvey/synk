@@ -153,7 +153,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)
             messages.info(request, _('Your password was successfully updated!'))
-        return redirect('home')
+        return redirect('dashboard')
 
     return render(request, 'users/password_change.html', {'form': form})
 

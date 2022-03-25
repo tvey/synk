@@ -102,7 +102,17 @@ class RegistrationForm(UserCreationForm):
 
 
 class ResetPasswordForm(PasswordResetForm):
-    email = forms.EmailField(label='', max_length=254)
+    email = forms.EmailField(
+        label='',
+        max_length=254,
+        widget=forms.EmailInput(
+            attrs={
+                'autocomplete': 'email',
+                'autofocus': 'autofocus',
+                'placeholder': 'Your email address',
+            }
+        ),
+    )
 
 
 class EmailForm(forms.Form):
