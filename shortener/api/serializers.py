@@ -48,7 +48,7 @@ class LinkSerializer(serializers.ModelSerializer):
         pattern = r'(https?://)?{site}'
         match = re.match(pattern.format(site=request.get_host()), value)
         if match:
-            raise serializers.ValidationError('Cannot squeeze self.')
+            raise serializers.ValidationError('Cannot shorten myself.')
         return value
 
     def get_link(self, obj):

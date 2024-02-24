@@ -3,7 +3,7 @@
 {% autoescape off %}
   {% include 'users/style_email.html' %}
   {% if first %}
-    <p>{% trans "Hi! Welcome to Squeeze!" %}</p>
+    <p>{% trans "Hi! Welcome to Synk!" %}</p>
   {% endif %}
     <p>{% trans "Please click on the following link to complete your registration" %}<br>
     {{ protocol }}://{{ domain }}{% url 'activate-account' uidb64=uidb64 token=token %}</p>

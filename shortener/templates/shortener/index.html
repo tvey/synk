@@ -5,7 +5,7 @@
 <div class="colorful">
   <main class="container text-center homepage enlarge pt-9">
     {% include '_messages.html' %}
-    <h1 id="main-heading">Squeeze that link</h1>
+    <h1 id="main-heading">Shorten your link</h1>
     <form method="post" class="form" id="main-form" novalidate>{% csrf_token %}
       {% for hidden_field in form.hidden_fields %}
         {{ hidden_field }}
@@ -14,7 +14,7 @@
       <div class="flex-group">
       {% for field in form.visible_fields %}
         {{ field }}
-      <button type="submit" class="btn">Ease</button>
+      <button type="submit" class="btn">Go!</button>
       </div>
         {% if field.errors %}
           {% for error in field.errors %}

@@ -10,7 +10,7 @@ from .validators import (
 
 class LinkModelForm(forms.ModelForm):
     source = forms.CharField(
-        label='What to squeeze',
+        label='What to shorten',
         widget=forms.Textarea(attrs={'rows': 4, 'class': 'select-text'}),
         error_messages={
             'required': 'You definitely to put something here!',

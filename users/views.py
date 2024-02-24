@@ -99,7 +99,7 @@ def activate_account(request, uidb64, token):
     if user and token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        msg = _('Great! Now you can login and squeeze more links.')
+        msg = _('Great! Now you can login and synk more links.')
         messages.info(request, msg)
         return redirect('login')
     else:

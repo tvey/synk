@@ -1,4 +1,4 @@
-# Squeeze, the link shortener
+# Synk, shorten your link
 
 Fun URL shortener project with freedom and API.
 
@@ -8,10 +8,10 @@ Fun URL shortener project with freedom and API.
 
 :heavy_check_mark: Dashboard to manage user's links.
 
-:heavy_check_mark: API (with authentication) - docs [here](https://eez.one/api/).
+:heavy_check_mark: API (with authentication) - docs [here](https://synk.fun/api/).
 
 ## It's working!
 
-[Squeeze](https://eez.one/)
+[Synk](https://synk.fun/)
 
-And more about the actual site: [About Squeeze](https://eez.one/about/)
+And more about the actual site: [About Synk](https://synk.fun/about/)

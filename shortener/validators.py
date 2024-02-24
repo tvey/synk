@@ -26,7 +26,7 @@ def validate_domain(value):
     pattern = r'(https?://)?{site}'
     match = re.match(pattern.format(site=domain), value)
     if match:
-        raise ValidationError('This one is already squeezed :)', code='invalid')
+        raise ValidationError('This one is already synked :)', code='invalid')
     return value
 
 
@@ -73,8 +73,7 @@ def validate_forbidden(value):
         'sadmin',
         'api',
         'one',
-        'eez',
-        'squeeze',
+        'synk',
     ]
 
     if value.lower() in forbidden:
