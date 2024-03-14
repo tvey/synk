@@ -79,6 +79,6 @@ class AboutAPIView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         domain = get_current_site(self.request)
-        protocol = 'https' if self.request.is_secure() else 'http'
-        context['base_url'] = f'{protocol}://{domain}/api/'
+        domain = self.request.get_host()
+        context['base_url'] = f'https://{domain}/api/'
         return context

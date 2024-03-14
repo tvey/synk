@@ -48,7 +48,8 @@ class ResultView(View):
 
     def get(self, request, *args, **kwargs):
         link = get_object_or_404(Link, code=request.session.get('code'))
-        result = request.build_absolute_uri(f'/{link.code}/')
+        domain = request.get_host()
+        result = f'{domain}/{link.code}/'
         form = self.form_class(initial={'source': result})
         context = {'form': form, 'result': result}
         context['source'] = request.session.get('source')
