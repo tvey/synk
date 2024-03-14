@@ -1,0 +1,42 @@
+services: 
+  web:
+    container_name: shortener_web
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    expose: 
+      - 8000
+    volumes:
+      - static_data:/app/staticfiles
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    container_name: shortener_db
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - shortener_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env.prod
+
+  nginx:
+    build: ./nginx
+    container_name: shortener_nginx
+    volumes:
+      - static_data:/app/staticfiles
+    ports:
+      - 80:80
+    depends_on:
+      - web
+
+volumes:
+  shortener_data:
+  static_data:

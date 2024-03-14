@@ -1,0 +1,17 @@
+FROM python:3.11-alpine
+
+ENV PYTHONUNBUFFERED=true
+ENV PYTHONDONTWRITEBYTECODE=true
+
+WORKDIR /app
+
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir pipenv
+COPY Pipfile* ./
+RUN pipenv requirements > requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+
+COPY . ./
+RUN chmod +x  ./entrypoint.sh
+
+ENTRYPOINT ["/app/entrypoint.sh"]

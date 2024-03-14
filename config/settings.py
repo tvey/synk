@@ -3,7 +3,10 @@ from pathlib import Path
 
 import environ
 
-env = environ.Env(DEBUG=(bool, False))
+env = environ.Env(
+    DEBUG=(bool, False),
+    TESTING=(bool, False),
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -13,7 +16,11 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(', ')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split()
+
+DATABASES = {
+    'default': env.db(),
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,11 +66,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-DATABASES = {
-    'default': env.db(),
-}
-
-
 # Password validation
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -106,17 +108,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # DRF
 
@@ -128,7 +128,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
-
 
 # Email
 
@@ -143,14 +142,21 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 if not DEBUG:
-    # WhiteNoise
     MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-    STATICFILES_STORAGE = (
-        'whitenoise.storage.CompressedStaticFilesStorage'
-    )
 
-    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    STORAGES = {
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
 
-# CSRF_COOKIE_SECURE = True
+    CSRF_TRUSTED_ORIGINS = env('CSRF_TRUSTED_ORIGINS').split()
 
-# SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_DOMAIN = env('CSRF_COOKIE_DOMAIN')
+
+    CSRF_COOKIE_SECURE = True
+
+    SESSION_COOKIE_SECURE = True
+
+if env('TESTING'):
+    DATABASES['default'] = env.db('TEST_DATABASE_URL')

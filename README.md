@@ -1,4 +1,4 @@
-# Synk, shorten your link
+# Synk: shorten your link
 
 Fun URL shortener project with freedom and API.
 
