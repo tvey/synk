@@ -21,7 +21,7 @@
         </p>
         <p>Don’t forget to pass the authentication token in the “Authorization” header of every request.</p>
         {% else %}
-        <p>You need to <a href="{% url 'register' %}">create and account</a>. This way you will get an <em>authentication token</em> that you should provide with every request. The token will always be available for you on this page.</p>
+        <p>You need to <a href="{% url 'register' %}">create an account</a> to use the API. This way you will get an <em>authentication token</em> that you should provide with every request. The token will always be available for you on this page.</p>
         {% endif %}
         <p>Base URL: <code>{{ base_url }}</code></p>
         <h3>Paths relative to the base URL</h3>
@@ -48,7 +48,7 @@ result <span class="operator">=</span> r.<span class="function">json</span>().<s
 </code></pre>
         <p>You will get an existing short link if you already created one with the same exact source.</p>
         <h3>Get a list of all your links</h3>
-      <p>Using cURL, you can get a list of all your links running a command like this:</p>
+      <p>Using cURL, you can get a list of all your links by running a command like this:</p>
 <pre><code class="bash">curl {{ base_url }}list/ -H <span class="string">"Authorization: Token &lt;YOUR TOKEN&gt;"</span></code></pre>
 
         <p>To get the same list using Python (and also pretty-print it), you can do the following:</p>
