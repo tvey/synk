@@ -26,7 +26,7 @@ def validate_domain(value):
     pattern = r'(https?://)?{site}'
     match = re.match(pattern.format(site=domain), value)
     if match:
-        raise ValidationError('This one is already synked :)', code='invalid')
+        raise ValidationError("Can't shorten this one :)", code='invalid')
     return value
 
 
