@@ -11,12 +11,14 @@ from .views import (
     SearchView,
     AboutView,
 )
+from shortener.api.views import AboutAPIView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('yay/', ResultView.as_view(), name='result'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
     path('about/', AboutView.as_view(), name='about'),
+    path('api/', AboutAPIView.as_view(), name='about-api'),
     path('search/', SearchView.as_view(), name='search'),
     path('new/', LinkCreateView.as_view(), name='create'),
     path('edit/<slug:code>/', LinkUpdateView.as_view(), name='update'),

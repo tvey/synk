@@ -9,7 +9,7 @@
     {% if '/about' not in request.path and '/dashboard' not in request.path and '/yay' not in request.path %}
     <li><a href="{% url 'about' %}">About</a></li>
     {% endif %}
-    <li><a href="{% url 'link-api:about' %}">API</a></li>
+    <li><a href="{% url 'about-api' %}">API</a></li>
     {% if request.user.is_authenticated and '/settings' not in request.path %}
     <li><a href="{% url 'user-settings' %}">Settings</a></li>
     {% endif %}

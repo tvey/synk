@@ -80,5 +80,5 @@ class AboutAPIView(TemplateView):
         context = super().get_context_data(**kwargs)
         domain = get_current_site(self.request)
         domain = self.request.get_host()
-        context['base_url'] = f'https://{domain}/api/'
+        context['base_url'] = f'https://{domain}/api/v1/'
         return context

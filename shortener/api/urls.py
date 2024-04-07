@@ -7,13 +7,11 @@ from .views import (
     LinkDetailAPIView,
     LinkUpdateAPIView,
     LinkDeleteAPIView,
-    AboutAPIView,
 )
 
-app_name = 'link-api'
+app_name = 'api'
 
 urlpatterns = [
-    path('', AboutAPIView.as_view(), name='about'),
     path('list/', LinkListAPIView.as_view(), name='list'),
     path('new/', LinkCreateAPIView.as_view(), name='create'),
     path('token/', obtain_auth_token, name='api_token_auth'),
