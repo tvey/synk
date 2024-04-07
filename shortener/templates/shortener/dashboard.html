@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load filters %}
 
 {% block title %}Dashboard | {% endblock title %}
 
@@ -43,7 +44,7 @@
               <td>
                 <a href="https://{{ request.get_host }}/{{ link.code }}/" target="_blank">{{ request.get_host }}/{{ link.code }}/</a>&nbsp;&nbsp;<i class="far fa-copy" onclick="copyToClipboard(this, button = false, copied = true)"></i>
               </td>
-              <td><a href="{{ link.source }}" target="_blank">{{ link.source|truncatechars:150 }}</a></td>
+              <td><a href="{{ link.source }}" target="_blank">{{ link.source|decode_url|truncatechars:150 }}</a></td>
               <td class="click">{{ link.click_set.count }}</td>
             <td class="manage">
               <a href="{% url 'update' link.code %}">Edit</a>

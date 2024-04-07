@@ -13,6 +13,7 @@ from django.urls import reverse_lazy
 
 from .forms import LinkForm, LinkModelForm
 from .models import Link
+from .utils import decode_link
 
 
 class HomeView(View):
@@ -52,7 +53,8 @@ class ResultView(View):
         result = f'{domain}/{link.code}/'
         form = self.form_class(initial={'source': result})
         context = {'form': form, 'result': result}
-        context['source'] = request.session.get('source')
+        source = request.session.get('source')
+        context['source'] = decode_link(source)
         context['exists'] = request.session.get('exists')
         return render(request, self.template_name, context)
 
