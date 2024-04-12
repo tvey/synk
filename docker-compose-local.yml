@@ -28,5 +28,21 @@ services:
       - shortener_data:/var/lib/postgresql/data
     env_file: ./.env
 
+  redis:
+    image: redis
+    container_name: shortener_redis
+    ports:
+      - "6380:6379"
+
+  celery:
+    build: .
+    container_name: shortener_celery
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+
 volumes:
   shortener_data:

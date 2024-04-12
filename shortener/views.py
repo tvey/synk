@@ -13,6 +13,7 @@ from django.urls import reverse_lazy
 
 from .forms import LinkForm, LinkModelForm
 from .models import Link
+from .tasks import check_url_for_redirect
 from .utils import decode_link
 
 
@@ -28,9 +29,16 @@ class HomeView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         context = {'form': form}
-        request.session['source'] = form.data['source']
         if form.is_valid():
             source = form.cleaned_data.get('source')
+            task = check_url_for_redirect.delay(source)
+            is_valid_url = task.get(timeout=10)
+
+            if not is_valid_url:
+                msg = 'Sorry, can\'t store a link that redirects.'
+                form.add_error('source', msg)
+                return render(request, self.template_name, context)
+
             owner = request.user if request.user.is_authenticated else None
             link, created = Link.objects.get_or_create(source=source, owner=owner)
             request.session['code'] = link.code
@@ -39,8 +47,8 @@ class HomeView(View):
             else:
                 request.session['exists'] = False
             return redirect(self.success_url)
-
-        return render(request, self.template_name, context)
+        else:
+            return render(request, self.template_name, context)
 
 
 class ResultView(View):

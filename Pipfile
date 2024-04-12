@@ -11,6 +11,8 @@ django-environ = "*"
 gunicorn = "*"
 whitenoise = "*"
 idna = "*"
+celery = {extras = ["redis"], version = "*"}
+requests = "*"
 
 [dev-packages]
 pytest = "*"
